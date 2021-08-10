@@ -70,7 +70,7 @@ TABLES['log'] = (
     "  `out_date` varchar(10),"
     "  `in_date` varchar(10),"
     "  `d_flag` tinyint(1) DEFAULT 1,"
-    "  `memo` varchar(255) NOT NULL,"
+    "  `memo` varchar(255),"
     "  PRIMARY KEY (`l_id`),"
     "  FOREIGN KEY (u_id) REFERENCES `users` (`u_id`),"
     "  FOREIGN KEY (b_id) REFERENCES `books` (`b_id`),"
