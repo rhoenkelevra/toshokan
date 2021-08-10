@@ -8,12 +8,14 @@ import mysql.connector as mydb
 # =============================================================================
 #                                    コネクション
 # =============================================================================
+
+
 def connect():
     conn = mydb.connect(
-    host = "localhost",
-    port = "3306",
-    user = "root",
-    password = "pass",
-    database = "toshokan"
-) 
+        host="localhost",
+        port="3306",
+        user="root",
+        password="rfr689022",
+        database="toshokan"
+    )
     return conn

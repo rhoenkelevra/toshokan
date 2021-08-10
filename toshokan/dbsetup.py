@@ -12,14 +12,14 @@ Created on Wed Aug  8 13:29:57 2021
 @author: user24
 """
 
+
 import mysql.connector as mydb
 from mysql.connector import errorcode
-
 con = mydb.connect(
     host="localhost",
     port="3306",
     user="root",
-    password="pass",
+    password="rfr689022",
     database="toshokan"
 )
 
@@ -32,7 +32,7 @@ TABLES['users'] = (
     "  `u_id` int(11) NOT NULL AUTO_INCREMENT,"
     "  `u_name` varchar(255) NOT NULL,"
     "  `u_pass` varchar(255) NOT NULL,"
-    "  `d_flag` tinyint(1) DEFAULT 1,"
+    "  `d_flag` tinyint(1) DEFAULT 1,"  # 1: ある 0:削除済
     "  PRIMARY KEY (`u_id`)"
     ") ENGINE=InnoDB")
 
@@ -45,11 +45,11 @@ TABLES['customer'] = (
     "  `address` varchar(255) NOT NULL,"
     "  `tel` varchar(20) NOT NULL,"
     "  `email` varchar(50),"
-    "  `qtybooks` int(10) DEFAULT 0,"
-    "  `register_date` timestamp," 
+    "  `qtybooks` int(10) DEFAULT 0,"  # 3まで
+    "  `register_date` timestamp,"
     "  `delete_date` date,"
-    "  `memo` varchar(255) DEFAULT "","
-    "  `d_flag` tinyint(1) DEFAULT 1,"
+    "  `memo` varchar(255) DEFAULT '',"
+    "  `d_flag` tinyint(1) DEFAULT 1,"  # 1: ある 0:削除済
     "  PRIMARY KEY (`c_id`)"
     ") ENGINE=InnoDB")
 
@@ -58,11 +58,11 @@ TABLES['books'] = (
     "  `b_id` int(11) NOT NULL AUTO_INCREMENT,"
     "  `isbn` char(20) NOT NULL,"
     "  `title` varchar(40) NOT NULL,"
-    "  `author` varchar(40),"
-    "  `p_name` varchar(40),"
-    "  `p_date` date,"
-    "  `status` tinyint(1) DEFAULT 1,"
-    "  `d_flag` tinyint(1) DEFAULT 1,"
+    "  `author` varchar(40) NOT NULL ,"
+    "  `p_name` varchar(40) NOT NULL,"
+    "  `p_date` date NOT NULL,"
+    "  `status` tinyint(1) DEFAULT 1,"  # 1:ある 0:貸出済
+    "  `d_flag` tinyint(1) DEFAULT 1,"  # 1: ある 0:削除済
     "  PRIMARY KEY (`b_id`)"
     ") ENGINE=InnoDB")
 
@@ -73,9 +73,9 @@ TABLES['log'] = (
     "  `b_id` int(11) NOT NULL,"
     "  `c_id` int(11) NOT NULL,"
     "  `out_date` date,"
-    "  `in_date` date,"
+    "  `in_date` date,"  # TODO DATEでテストする　YYYY/MM/DD １０文字まで
     "  `d_flag` tinyint(1) DEFAULT 1,"
-    "  `memo` varchar(255) DEFAULT "","
+    "  `memo` varchar(255) DEFAULT '',"
     "  PRIMARY KEY (`l_id`),"
     "  FOREIGN KEY (u_id) REFERENCES `users` (`u_id`),"
     "  FOREIGN KEY (b_id) REFERENCES `books` (`b_id`),"
