@@ -20,6 +20,7 @@ def addUser():
     cur = con.cursor()
 
     users = [
+        #    u_name , u_pass
         ('suzuki', 'pass'),
         ('yamane', 'pass'),
         ('inoue', 'pass'),
@@ -42,6 +43,7 @@ def addBook():
     cur = con.cursor()
 
     books = [
+        # isbn      title     author         p      p_date       status, d_flag
         ('12345', 'example', 'JR Tolken', 'Intes', '2019-10-10', 1, 1),
         ('2345', 'aifja', 'Yokota', 'Intesc', '2019-02-22', 1, 1),
         ('098735', 'test', 'rene', 'Intesc', '2019-10-10', 1, 1),
@@ -75,10 +77,11 @@ def addCustomer():
     cur = con.cursor()
 
     customer = [
-        ("hello", "hello", 5673994, 'aichi', '909-0999-9999', 3, ),
-        ("hi", "hi", 5673994, 'aichi', '909-0999-9999', 1),
-        ("bye", "hi", 5673994, 'aichi', '909-0999-9999', 1),
-        ("john", "hello", 5673994, 'aichi', '909-0999-9999', 2),
+        # c_name    #c_name_kana post_code address tel            qtybooks
+        ("yamauchi", "yamauchi", 5673994, 'aichi', '909-0999-9999', 3, ),
+        ("sara", "sara", 5673994, 'aichi', '909-0999-9999', 1),
+        ("nagamine", "nagamine", 5673994, 'aichi', '909-0999-9999', 1),
+        ("yoshida", "yoshida", 5673994, 'aichi', '909-0999-9999', 2),
 
     ]
     cur.executemany(
@@ -100,16 +103,16 @@ def addLog():
     cur = con.cursor()
 
     log = [
-
-        (1, 1, 3, '2020-06-12', 'nashi'),
-        (1, 2, 3, '2020-06-12', 'nashi'),
-        (1, 3, 2, '2020-06-12', 'nashi'),
-        (1, 4, 2, '2020-06-12', 'nashi'),
-        (1, 5, 1, '2020-06-12', 'nashi'),
-        (1, 6, 1, '2020-06-12', 'nashi'),
+        #     u_id,b_id,c_id,out_date
+        (1, 1, 3, '2020/06/12'),
+        (1, 2, 3, '2020/06/12'),
+        (1, 3, 2, '2020/06/12'),
+        (1, 4, 2, '2020/06/12'),
+        (1, 5, 1, '2020/06/12'),
+        (1, 6, 1, '2020/06/12'),
     ]
     cur.executemany(
-        "insert into log(u_id, b_id, c_id, out_date, memo) values(%s, %s, %s, %s, %s)", log)
+        "insert into log(u_id, b_id, c_id, out_date) values(%s, %s, %s, %s)", log)
 
     con.commit()
     print("登録しました。")
@@ -117,7 +120,11 @@ def addLog():
     con.close()
 
 
+# ==================================================================
+# 先にこの３関数を呼び出す
 # addUser()
 # addCustomer()
 # addBook()
+# ==================================================================
+# 最後にこれを呼び出す
 addLog()
