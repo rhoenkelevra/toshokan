@@ -19,7 +19,7 @@ con = mydb.connect(
     host="localhost",
     port="3306",
     user="root",
-    password="rfr689022",
+    password="pass",
     database="toshokan"
 )
 
