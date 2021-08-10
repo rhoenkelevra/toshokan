@@ -36,7 +36,7 @@ TABLES['users'] = (
     "  PRIMARY KEY (`u_id`)"
     ") ENGINE=InnoDB")
 
-TABLES['customer'] = (
+TABLES['customers'] = (
     "CREATE TABLE `customer` ("
     "  `c_id` int(11) NOT NULL AUTO_INCREMENT,"
     "  `c_name` varchar(20) NOT NULL,"
@@ -66,7 +66,7 @@ TABLES['books'] = (
     "  PRIMARY KEY (`b_id`)"
     ") ENGINE=InnoDB")
 
-TABLES['log'] = (
+TABLES['logs'] = (
     "CREATE TABLE `log` ("
     "  `l_id` int(11) NOT NULL AUTO_INCREMENT,"
     "  `u_id` int(11) NOT NULL,"
