@@ -25,7 +25,6 @@ def returnBook():
     cursor = con.cursor(buffered=True)
 
     condition = True
-
     while condition == True:
 
         b_id = int(input("BookIDを入れてください。　（00　終了） \n>"))\

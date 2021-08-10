@@ -75,14 +75,14 @@ def addCustomer():
     cur = con.cursor()
 
     customer = [
-        ("hello", "hello", 5673994, 'aichi', '909-0999-9999'),
-        ("hi", "hi", 5673994, 'aichi', '909-0999-9999'),
-        ("bye", "hi", 5673994, 'aichi', '909-0999-9999'),
-        ("john", "hello", 5673994, 'aichi', '909-0999-9999'),
+        ("hello", "hello", 5673994, 'aichi', '909-0999-9999', 3, ),
+        ("hi", "hi", 5673994, 'aichi', '909-0999-9999', 1),
+        ("bye", "hi", 5673994, 'aichi', '909-0999-9999', 1),
+        ("john", "hello", 5673994, 'aichi', '909-0999-9999', 2),
 
     ]
     cur.executemany(
-        "insert into customer (c_name, c_name_kana, post_code, address, tel) values(%s, %s, %s, %s, %s)", customer)
+        "insert into customer (c_name, c_name_kana, post_code, address, tel, qtybooks) values(%s, %s, %s, %s, %s)", customer)
 
     con.commit()
     print("登録しました。")

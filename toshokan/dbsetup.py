@@ -46,7 +46,7 @@ TABLES['customer'] = (
     "  `tel` varchar(20) NOT NULL,"
     "  `email` varchar(50),"
     "  `qtybooks` int(10) DEFAULT 0,"  # 3まで
-    "  `register_date` timestamp,"
+    "  `register_date` DATE DEFAULT(CURRENT_DATE), "
     "  `delete_date` date,"
     "  `memo` varchar(255) DEFAULT '',"
     "  `d_flag` tinyint(1) DEFAULT 1,"  # 1: ある 0:削除済
