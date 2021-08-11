@@ -85,7 +85,7 @@ def addCustomer():
 
     ]
     cur.executemany(
-        "insert into customer (c_name, c_name_kana, post_code, address, tel, qtybooks) values(%s, %s, %s, %s, %s)", customer)
+        "insert into customer (c_name, c_name_kana, post_code, address, tel, qtybooks) values(%s, %s, %s, %s, %s, %s)", customer)
 
     con.commit()
     print("登録しました。")
