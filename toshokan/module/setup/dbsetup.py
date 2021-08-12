@@ -15,28 +15,30 @@ Created on Wed Aug  8 13:29:57 2021
 
 import mysql.connector as mydb
 from mysql.connector import errorcode
+
 con = mydb.connect(
     host="localhost",
     port="3306",
     user="root",
     password="pass",
-    database="toshokan"
+    database="toshokan",
 )
 
 cursor = con.cursor(buffered=True)
 
 TABLES = {}
 
-TABLES['users'] = (
+TABLES["users"] = (
     "CREATE TABLE `users` ("
     "  `u_id` int(11) NOT NULL AUTO_INCREMENT,"
     "  `u_name` varchar(255) NOT NULL,"
     "  `u_pass` varchar(255) NOT NULL,"
     "  `d_flag` tinyint(1) DEFAULT 1,"  # 1: ある 0:削除済
     "  PRIMARY KEY (`u_id`)"
-    ") ENGINE=InnoDB")
+    ") ENGINE=InnoDB"
+)
 
-TABLES['customers'] = (
+TABLES["customers"] = (
     "CREATE TABLE `customer` ("
     "  `c_id` int(11) NOT NULL AUTO_INCREMENT,"
     "  `c_name` varchar(20) NOT NULL,"
@@ -51,9 +53,10 @@ TABLES['customers'] = (
     "  `memo` varchar(255) DEFAULT '',"
     "  `d_flag` tinyint(1) DEFAULT 1,"  # 1: ある 0:削除済
     "  PRIMARY KEY (`c_id`)"
-    ") ENGINE=InnoDB")
+    ") ENGINE=InnoDB"
+)
 
-TABLES['books'] = (
+TABLES["books"] = (
     "CREATE TABLE `books` ("
     "  `b_id` int(11) NOT NULL AUTO_INCREMENT,"
     "  `isbn` char(20) NOT NULL,"
@@ -64,9 +67,10 @@ TABLES['books'] = (
     "  `status` tinyint(1) DEFAULT 1,"  # 1:ある 0:貸出済
     "  `d_flag` tinyint(1) DEFAULT 1,"  # 1: ある 0:削除済
     "  PRIMARY KEY (`b_id`)"
-    ") ENGINE=InnoDB")
+    ") ENGINE=InnoDB"
+)
 
-TABLES['logs'] = (
+TABLES["logs"] = (
     "CREATE TABLE `log` ("
     "  `l_id` int(11) NOT NULL AUTO_INCREMENT,"
     "  `u_id` int(11) NOT NULL,"
@@ -80,12 +84,13 @@ TABLES['logs'] = (
     "  FOREIGN KEY (u_id) REFERENCES `users` (`u_id`),"
     "  FOREIGN KEY (b_id) REFERENCES `books` (`b_id`),"
     "  FOREIGN KEY (c_id) REFERENCES `customer` (`c_id`)"
-    ") ENGINE=InnoDB")
+    ") ENGINE=InnoDB"
+)
 
 for table_name in TABLES:
     table_description = TABLES[table_name]
     try:
-        print("Creating table {}: ".format(table_name), end='')
+        print("Creating table {}: ".format(table_name), end="")
         cursor.execute(table_description)
     except mydb.Error as err:
         if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:

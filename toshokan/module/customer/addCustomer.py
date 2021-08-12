@@ -1,15 +1,11 @@
-
 import mysql.connector as mydb
-#利用者一覧管理メニュー
-#２）新規登録
-#新規利用者を登録します
+
+# 利用者一覧管理メニュー
+# ２）新規登録
+# 新規利用者を登録します
 
 conn = mydb.connect(
-    host="localhost",
-    port="3306",
-    user="user",
-    password="pass",
-    database="toshokan"
+    host="localhost", port="3306", user="user", password="pass", database="toshokan"
 )
 
 # カーソルの作成
@@ -51,30 +47,33 @@ while True:
 
 print("利用者の関連情報を入れてください。")
 
-        # 未登録の場合#　名前が合格の時
-        # 利用者情報を入力する
+# 未登録の場合#　名前が合格の時
+# 利用者情報を入力する
 n_name = input("必須：名前を入力してください：")
 n_name_kana = input("必須：カナ名を入力してください：")
-n_post_code = int(input("必須：郵便番号を入力してください："))#DBを文字化する
+n_post_code = int(input("必須：郵便番号を入力してください："))  # DBを文字化する
 n_address = input("必須：住所を入力してください：")
 n_tel = input("必須：電話番号を入力してください：")
 n_email = input("任意：メールアドレスを入力してください：")
 n_memo = input("任意：記載欄：")
 
 
-    # カスタマー情報を入力
+# カスタマー情報を入力
 c_id = input("")
-data = (n_name,n_name_kana,n_post_code,n_address,n_tel,n_email,n_memo)
+data = (n_name, n_name_kana, n_post_code, n_address, n_tel, n_email, n_memo)
 
 # 利用者情報テーブルへの追加
 
-cur.execute("insert into customer(c_name, c_name_kana, post_code, address, tel, email, memo) values(%s, %s, %s, %s, %s, %s, %s)", (data))
+cur.execute(
+    "insert into customer(c_name, c_name_kana, post_code, address, tel, email, memo) values(%s, %s, %s, %s, %s, %s, %s)",
+    (data),
+)
 # if cur.rowcount == 0:
 #         # 追加失敗
 #         raise Exception
-            
-            
-    # 更新を確定する
+
+
+# 更新を確定する
 conn.commit()
 print("利用者情報を登録しました。")
 # except:
