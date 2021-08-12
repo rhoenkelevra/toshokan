@@ -4,10 +4,9 @@ Created on Tue Aug 10 11:01:26 2021
 
 @author: user24
 """
-
+# from module.setup.connect import connect
+import re
 import mysql.connector as mydb
-# from ..connect import connect
-
 
 def connect():
     conn = mydb.connect(
@@ -17,18 +16,22 @@ def connect():
         password="pass",
         database="toshokan"
     )
+    
     return conn
-con = connect()
-cursor = con.cursor(buffered=True)
-
 
 def returnBook():
+    con = connect()
+    cursor = con.connect(buffered=True)
     
     condition = True
     while condition == True:
-
-        b_id = int(input("図書IDを入れてください。　（00　終了） \n>"))\
-
+        try:
+            b_id = int(input("図書IDを入れてください。　（00　終了） \n>"))
+        
+        except:
+            print("数字で入れてください。")
+            continue
+        
         if b_id == 00:
             break
 
@@ -83,23 +86,34 @@ def returnBook():
         print("=" * 20)
 
         # 返却日の入力
-        print("(00で中止します。)")
-        return_date = input("返却日を記入してください。(YYYY / MM / DD )\n>")
-        if return_date == '00':
-            continue
-        data = (return_date, l_id)
-        sql = "update log SET in_date=%s where l_id=%s"
-        cursor.execute(sql, data)
-        con.commit()
-
-        # 最後の表示
-        cursor.execute("SELECT title FROM books WHERE b_id=%s", (b_id,))
-        dt = cursor.fetchone()
-
-
-        print("図書", dt[0], "を返却しました。")
-        condition = False
-
         
+        date_insert = True
+        while date_insert == True:
+            print("(00で中止します。)")
+            return_date = input("返却日を記入してください。(YYYY / MM / DD )\n>")
+            if return_date == '00':
+                break
+                
+            date_format = re.search('\d\d\d\d[/]\d\d[/]\d\d',return_date)
+            if not date_format:
+                print('入力できる日付は、数字および ”/” のみです。（例：2000/10/12）')
+                continue
+            
+            
+            data = (return_date, l_id)
+            sql = "update log SET in_date=%s where l_id=%s"
+            cursor.execute(sql, data)
+            date_insert = False
+            
+            con.commit()
 
-returnBook()
+            # 最後の表示
+            cursor.execute("SELECT title FROM books WHERE b_id=%s", (b_id,))
+            dt = cursor.fetchone()
+            print("図書", dt[0], "を返却しました。")
+            
+        
+    
+        cursor.close()
+        con.close()   
+
