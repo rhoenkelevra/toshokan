@@ -30,7 +30,7 @@ TABLES = {}
 
 TABLES["users"] = (
     "CREATE TABLE `users` ("
-    "  `u_id` int(11) NOT NULL AUTO_INCREMENT,"
+    "  `u_id` int(11) NOT NULL AUTO_INCREMENT=1000,"
     "  `u_name` varchar(255) NOT NULL,"
     "  `u_pass` varchar(255) NOT NULL,"
     "  `d_flag` tinyint(1) DEFAULT 1,"  # 1: ある 0:削除済
@@ -77,7 +77,8 @@ TABLES["logs"] = (
     "  `b_id` int(11) NOT NULL,"
     "  `c_id` int(11) NOT NULL,"
     "  `out_date` date,"
-    "  `in_date` date,"  # TODO DATEでテストする　YYYY/MM/DD １０文字まで
+    "  `in_limit_date` date,"
+    "  `in_date` date,"  
     "  `d_flag` tinyint(1) DEFAULT 1,"
     "  `memo` varchar(255) DEFAULT '',"
     "  PRIMARY KEY (`l_id`),"
