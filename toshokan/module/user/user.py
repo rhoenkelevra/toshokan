@@ -4,20 +4,9 @@ Created on Thu Aug 12 10:47:10 2021
 
 @author: user24
 """
-# from module.setup.connect import connect
-import mysql.connector as mydb
 import csv
-
-
-def connect():
-    conn = mydb.connect(
-        host="localhost",
-        port="3306",
-        user="root",
-        password="pass",
-        database="toshokan",
-    )
-    return conn
+from module.setup.connect import connect
+from getpass import getpass
 
 
 class User:
@@ -29,7 +18,8 @@ class User:
 
     def login_user(self):
         con = connect()
-        cursor = con.cursor(buffered=True)
+        cursor = con.cursor()
+        
         success = False
         print("\n" + "-" * 7, "ログイン", "-" * 7)
         while success == False:
@@ -38,7 +28,7 @@ class User:
             except:
                 print("ログインIDまたはパスワードが違います。")
                 continue
-            u_pass = input("パスワードを入力 \n>")
+            u_pass = getpass("パスワードを入力 \n>")
             
             data = (u_id, u_pass)
             cursor.execute("SELECT u_id, u_name, d_flag FROM users where u_id=%s and u_pass=%s ", data)
@@ -54,6 +44,7 @@ class User:
                 
             self.login = rows[0][0]
             self.loginName = rows[0][1]
+            
             
             success = True
             
@@ -102,7 +93,14 @@ class User:
         
         deleteStatus = False
         while deleteStatus == False:
-            u_id = int(input("ユーザのIDを入力してください。（00　終了） \n>"))
+            try:
+                u_id = int(input("ユーザのIDを入力してください。（00　終了） \n>"))
+            except:
+                print("数値を入れてください。")
+                continue
+            
+            if u_id == 00:
+                break
             
             cursor.execute("select u_id, u_name from users where u_id=%s", (u_id,))
             res = cursor.fetchall()
@@ -116,7 +114,7 @@ class User:
                 print("=" * 10)
                 
             
-            confirm = input("この内容で削除して良いですか？（はい：y / いいえ：n")
+            confirm = input("この内容で削除して良いですか？\n（はい：y / いいえ：n)\n>")
             
             if confirm == "n":
                 continue
@@ -134,7 +132,7 @@ class User:
         con = connect()
         cursor = con.cursor(buffered=True)
         
-        cursor.execute("select u_id, u_name, d_flag from users;")
+        cursor.execute("select u_id, u_name, d_flag from users GROUP BY d_flag ORDER BY u_id")
         
         res = cursor.fetchall()
         
@@ -153,8 +151,11 @@ class User:
             print("=" * 10)
             
         
-        # export = input("Export?")
-#         #TODO csv export
+        
+# =============================================================================
+# オプション　ＣＳＶ出力
+
+#         export = input("Export?")
 #         print(res)
 #         res_list = list(res)
 #         if export == "y":
@@ -167,11 +168,11 @@ class User:
 #                         row_list[2] = "Deleted"
 #                     else:
 #                         row_list[2] = "Active"   
-                        
+#                         
 #                     # writer.writerow([row_list[0], row_list[1], row_list[2]] )
 #                     writer.writerow(row_list)
+# =============================================================================
                 
-        
+     
 # user = User()
-# user.show_user()
-    
+# user.delete_user()
