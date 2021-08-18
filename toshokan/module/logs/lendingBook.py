@@ -62,11 +62,18 @@ def lendingBook(u_id):
                     success = False
                     continue  
         
-                if rows[1] <= 0:
+                if rows[1] == 0:
                     print("図書はすでに貸出中です。")
                     success = False
                     continue  
-                
+    # # =================================================================
+    #     # ユーザーIDの選択 ※自動でログイン時のIDにする
+    #     try:
+    #         u_id = int(input("ユーザーIDを入力してください。(00で終了）\n>"))
+    #     except:
+    #         print("数値を入力してください。")
+            
+    # =================================================================
         # 利用者IDの選択 
         success = False
         while success == False:
@@ -131,7 +138,7 @@ def lendingBook(u_id):
         condition = True
         while condition == True:
             if inp == "n":
-                return
+                break
             
             # 変数へ代入し、logテーブルへデータ挿入
             try:
