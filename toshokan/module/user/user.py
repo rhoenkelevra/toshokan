@@ -4,7 +4,6 @@ Created on Thu Aug 12 10:47:10 2021
 
 @author: user24
 """
-import csv
 from module.setup.connect import connect
 from getpass import getpass
 

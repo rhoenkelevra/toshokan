@@ -5,6 +5,7 @@ Created on Tue Aug 10 11:01:26 2021
 @author: user24
 """
 from module.setup.connect import connect
+from datetime import datetime
 import re
 
 
@@ -12,8 +13,8 @@ def returnBook():
 
     conn = connect()
     cur = conn.cursor(buffered=True)
-    condition = True
-    while condition == True:
+    return_status = False
+    while return_status == False:
         try:
             b_id = int(input("図書IDを入れてください。　（00　終了） \n>"))
 
@@ -22,7 +23,7 @@ def returnBook():
             continue
 
         if b_id == 00:
-            break
+            return
 
         cur.execute(
             "SELECT * FROM log WHERE b_id = %s AND in_date IS NULL", (b_id,)
@@ -73,10 +74,9 @@ def returnBook():
     
             # 返却日の入力
     
-            date_insert = True
-            while date_insert == True:
-                print("(00で中止します。)")
-                return_date = input("返却日を記入してください。(YYYY / MM / DD )\n>")
+            date_insert = False
+            while date_insert == False:
+                return_date = input("返却日を記入してください。(YYYY / MM / DD )  (00で中止します。)\n>")
                 if return_date == "00":
                     break
     
@@ -84,8 +84,16 @@ def returnBook():
                 if not date_format:
                     print("入力できる日付は、数字および ”/” のみです。（例：2000/10/12）")
                     continue
+                try:
+                    return_date = datetime.strptime(return_date,"%Y/%m/%d").date()
+                except:
+                    print("入力できる日付の範囲は1/01/01～9999/12/31にしてください。")
+                    continue
                 
-                 # 利用者のqtybooksをー１にする
+                date_insert = True
+                 
+                
+            # 利用者のqtybooksをー１にする
             cur.execute(
                 "update customer set qtybooks=qtybooks - 1  where c_id=%s", (c_id,)
             )
@@ -97,7 +105,7 @@ def returnBook():
             data = (return_date, l_id)
             sql = "update log SET in_date=%s where l_id=%s"
             cur.execute(sql, data)
-            date_insert = False
+            
             conn.commit()
     
             # 最後の表示
@@ -109,7 +117,7 @@ def returnBook():
             conn.rollback()
             print("登録に失敗しました。")
             
-        condition = False
+        return_status = True
 
         cur.close()
         conn.close()

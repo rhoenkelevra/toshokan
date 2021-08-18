@@ -43,7 +43,7 @@ TABLES["customers"] = (
     "  `c_id` int(11) NOT NULL AUTO_INCREMENT,"
     "  `c_name` varchar(20) NOT NULL,"
     "  `c_name_kana` varchar(50) NOT NULL,"
-    "  `post_code` int(8) NOT NULL,"
+    "  `post_code` varchar(8) NOT NULL,"
     "  `address` varchar(255) NOT NULL,"
     "  `tel` varchar(20) NOT NULL,"
     "  `email` varchar(50),"

@@ -10,13 +10,14 @@ from module.logs.returnBook import returnBook
 from module.logs.lendingBook import lendingBook
 
 from module.books.addBook import addBook
-from module.books.deleteBook0817 import deleteBook
-from module.books.showBook0817 import showBook
-from module.books.csvBook0817 import csvBook
+from module.books.deleteBook import deleteBook
+from module.books.showBook import showBook
+from module.books.csvBook import csvBook
 
 from module.customer.addCustomer import addCustomer
 from module.customer.deleteCustomer import deleteCustomer
 from module.customer.showCustomer import showCustomer
+from module.customer.csvCustomer import csvCustomer
 
 
 
@@ -65,7 +66,7 @@ while True:
         if menu_choice == 1:
             lendingBook(user.login)
         if menu_choice == 2:
-            returnBook(user.login)
+            returnBook()
 
         if menu_choice == 3:
             
@@ -95,8 +96,8 @@ while True:
                 deleteCustomer()
             if customer_menu == 3:
                 showCustomer()
-            # if customer_menu == 4:
-            #     exportCustomer()
+            if customer_menu == 4:
+                csvCustomer()
             
            
         if menu_choice == 5:
