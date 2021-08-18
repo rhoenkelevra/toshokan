@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
+#!/usr/bin/env python
+
+
 """
 Created on Fri Aug  6 14:34:58 2021
 
 @author: user24
 """
-from module.user.user import User
+from module.users.user import User
 
 from module.logs.returnBook import returnBook
 from module.logs.lendingBook import lendingBook
@@ -13,11 +16,12 @@ from module.books.addBook import addBook
 from module.books.deleteBook import deleteBook
 from module.books.showBook import showBook
 from module.books.csvBook import csvBook
+from module.books.csvBook_lending import csvBook_lending
 
-from module.customer.addCustomer import addCustomer
-from module.customer.deleteCustomer import deleteCustomer
-from module.customer.showCustomer import showCustomer
-from module.customer.csvCustomer import csvCustomer
+from module.customers.addCustomer import addCustomer
+from module.customers.deleteCustomer import deleteCustomer
+from module.customers.showCustomer import showCustomer
+from module.customers.csvCustomer import csvCustomer
 
 
 
@@ -49,7 +53,7 @@ while True:
     #   メニュー
     # =============================================================================
     if success is True:
-        print("\n")
+       
         print("=" * 10, "メニュー", "=" * 10)
         
         try:
@@ -70,7 +74,7 @@ while True:
 
         if menu_choice == 3:
             
-            book_menu = int(input("1: 図書登録\n2: 図書削除\n3: 図書一覧\n4: 図書出力\n00: 戻る\n>"))
+            book_menu = int(input("1: 図書登録\n2: 図書削除\n3: 図書一覧\n4: 図書出力\n5: 貸出中図書出力\n00: 戻る\n>"))
             
             if book_menu == 00:
                 continue
@@ -83,6 +87,8 @@ while True:
                 showBook()
             if book_menu == 4:
                 csvBook()
+            if book_menu == 5:
+                csvBook_lending()
             
             
         if menu_choice == 4:

@@ -131,7 +131,7 @@ def lendingBook(u_id):
         condition = True
         while condition == True:
             if inp == "n":
-                break
+                return
             
             # 変数へ代入し、logテーブルへデータ挿入
             try:

@@ -30,12 +30,12 @@ TABLES = {}
 
 TABLES["users"] = (
     "CREATE TABLE `users` ("
-    "  `u_id` int(11) NOT NULL AUTO_INCREMENT=1000,"
+    "  `u_id` int(11) NOT NULL  AUTO_INCREMENT,"
     "  `u_name` varchar(255) NOT NULL,"
     "  `u_pass` varchar(255) NOT NULL,"
     "  `d_flag` tinyint(1) DEFAULT 1,"  # 1: ある 0:削除済
     "  PRIMARY KEY (`u_id`)"
-    ") ENGINE=InnoDB"
+    ") ENGINE=InnoDB  AUTO_INCREMENT=1000"
 )
 
 TABLES["customers"] = (

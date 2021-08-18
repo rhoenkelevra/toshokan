@@ -4,7 +4,6 @@ Created on Thu Aug 12 10:47:10 2021
 
 @author: user24
 """
-import csv
 from module.setup.connect import connect
 from getpass import getpass
 
@@ -34,6 +33,7 @@ class User:
             cursor.execute("SELECT u_id, u_name, d_flag FROM users where u_id=%s and u_pass=%s ", data)
             
             rows = cursor.fetchall()
+            
             if cursor.rowcount == 1:
             #ｄｆｌａｇ確認
                 if rows[0][2] == 0:
@@ -41,6 +41,7 @@ class User:
                     continue
             else:
                 print("ログインIDまたはパスワードが違います。")
+                continue
                 
             self.login = rows[0][0]
             self.loginName = rows[0][1]
