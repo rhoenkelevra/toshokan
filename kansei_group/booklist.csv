@@ -1,0 +1,15 @@
+図書ID,isbn,図書名,著者名,出版社,出版日,貸出状況
+1,12345,example,JR Tolken,Intes,2019-10-10,-3
+2,2345,aifja,Yokota,Intesc,2019-02-22,貸出可
+3,98735,test,rene,Intesc,2019-10-10,貸出可
+4,98735,test,rene,Intesc,2019-10-10,貸出可
+5,98735,test,rene,Intesc,2019-10-10,貸出可
+6,98735,test,rene,Intesc,2019-10-10,貸出可
+7,98735,test,rene,Intesc,2019-10-10,貸出可
+8,98735,test,rene,Intesc,2019-10-10,貸出可
+9,98735,test,rene,Intesc,2019-10-10,貸出可
+10,98735,test,rene,Intesc,2019-10-10,貸出可
+11,98735,test,rene,Intesc,2019-10-10,貸出可
+12,98735,test,rene,Intesc,2019-10-10,貸出可
+13,98735,test,rene,Intesc,2019-10-10,貸出可
+14,999,harry poter,jr tolkes,british,1998-10-10,貸出可

@@ -26,7 +26,7 @@ def returnBook():
             return
 
         cur.execute(
-            "SELECT * FROM log WHERE b_id = %s AND in_date IS NULL", (b_id,)
+            "SELECT * FROM logs WHERE b_id = %s AND in_date IS NULL", (b_id,)
         )
 
         # 貸出のログを確認する
@@ -51,7 +51,7 @@ def returnBook():
 
         # 利用者データ表示する
         cur.execute(
-            "SELECT c_id,c_name from customer where c_id=%s", (c_id,)
+            "SELECT c_id,c_name from customers where c_id=%s", (c_id,)
         )
         customer_results = cur.fetchone()
         customer_results[0]
@@ -95,15 +95,15 @@ def returnBook():
                 
             # 利用者のqtybooksをー１にする
             cur.execute(
-                "update customer set qtybooks=qtybooks - 1  where c_id=%s", (c_id,)
+                "update customers set qtybooks=qtybooks - 1  where c_id=%s", (c_id,)
             )
     
             # Bookのstatusをー１にする
             cur.execute(
-                "update books set status=status - 1  where b_id=%s", (b_id,)
+                "update books set status=status + 1  where b_id=%s", (b_id,)
             )
             data = (return_date, l_id)
-            sql = "update log SET in_date=%s where l_id=%s"
+            sql = "update logs SET in_date=%s where l_id=%s"
             cur.execute(sql, data)
             
             conn.commit()
