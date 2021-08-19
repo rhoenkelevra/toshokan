@@ -16,7 +16,7 @@ def returnBook():
     return_status = False
     while return_status == False:
         try:
-            b_id = int(input("図書IDを入れてください。　（00　終了） \n>"))
+            b_id = int(input("図書IDを入力してください。　（00　終了） \n>"))
 
         except:
             print("数字で入れてください。")
@@ -32,7 +32,7 @@ def returnBook():
         # 貸出のログを確認する
         row_count = cur.rowcount
         if row_count == 0:
-            print("「図書は貸出されていません。")
+            print("図書は貸出されていません。")
 
             continue
 
@@ -46,9 +46,9 @@ def returnBook():
         cur.execute("SELECT b_id,title from books where b_id=%s", (b_id,))
         books_results = cur.fetchall()
         for row in books_results:
-            print("=" * 20)
-            print("図書ID：　", row[0])
-            print("図書名：　", row[1])
+            print("=" * 60)
+            print(f"図書ID：　{row[0] : <}")
+            print(f"図書名：　{row[1] : <}")
 
         # 利用者データ表示する
         cur.execute(
@@ -57,26 +57,27 @@ def returnBook():
         customer_results = cur.fetchone()
         customer_results[0]
 
-        print("利用者のID: ", customer_results[0])
-        print("利用者の名前: ", customer_results[1])
+        print(f"利用者ID: {customer_results[0] :<20}")
+        print(f"利用者名前: {customer_results[1] :<20}")
         try:
            
     
-            print("ログID：　", l_id)
+            print(f"ログID：　{l_id :<20}")
     
             out_date = str(out_date)
             new_date = out_date.replace("-", "/")
             
             in_limit_date = str(in_limit_date)
             in_limit_date = in_limit_date.replace("-", "/")
-            print("貸出日：　", new_date)
-            print("貸出期限：　", in_limit_date)
-            print("=" * 20)
+            print(f"貸出日：　{new_date :<12}")
+            print(f"貸出期限：　{in_limit_date :<20}")
+            print("=" * 60)
     
             # 返却日の入力
             date_insert = False
             while date_insert == False:
-                return_date = input("返却日を記入してください。(YYYY / MM / DD )  (00で中止します。)\n>")
+                print("内容を確認してよろしければ")
+                return_date = input("返却日を入力してください。(YYYY / MM / DD )  (00で中止します)\n>")
                 if return_date == "00":
                     break
                 # /　確認
@@ -125,4 +126,4 @@ def returnBook():
         conn.close()
 
 
-# returnBook()
+returnBook()

@@ -24,7 +24,7 @@ class User:
         print("\n" + "-" * 7, "ログイン", "-" * 7)
         while success == False:
             try:
-                u_id = int(input("ユーザIDを入力 \n>"))
+                u_id = int(input("ログインIDを入力 \n>"))
             except:
                 print("ログインIDまたはパスワードが違います。")
                 continue
@@ -51,7 +51,7 @@ class User:
             success = True
             
         print("\n")
-        print(f"ようこそ {self.loginName} さん。")
+        print(f"ようこそ　{self.loginName}さん。")
         self.login_status = True
         cur.close()
         conn.close()
