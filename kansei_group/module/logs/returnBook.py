@@ -36,10 +36,11 @@ def returnBook():
 
             continue
 
-        # ログがある場合データを表示する
-        log_results = cur.fetchall()
-        for row in log_results:
-            l_id, u_id, b_id, c_id, out_date, in_limit_date, in_date, d_flag, memo = row
+        # LOGがある場合データを表示する
+        log_results = cur.fetchone()
+        
+        # アンパック
+        l_id, u_id, b_id, c_id, out_date, in_limit_date, in_date, d_flag, memo = log_results
 
         # 図書のデータを表示する
         cur.execute("SELECT b_id,title from books where b_id=%s", (b_id,))
@@ -73,17 +74,18 @@ def returnBook():
             print("=" * 20)
     
             # 返却日の入力
-    
             date_insert = False
             while date_insert == False:
                 return_date = input("返却日を記入してください。(YYYY / MM / DD )  (00で中止します。)\n>")
                 if return_date == "00":
                     break
-    
+                # /　確認
                 date_format = re.search("\d\d\d\d[/]\d\d[/]\d\d", return_date)
                 if not date_format:
                     print("入力できる日付は、数字および ”/” のみです。（例：2000/10/12）")
                     continue
+                
+                # datetimeに変更
                 try:
                     return_date = datetime.strptime(return_date,"%Y/%m/%d").date()
                 except:
