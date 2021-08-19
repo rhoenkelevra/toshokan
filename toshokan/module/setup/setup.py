@@ -18,4 +18,4 @@ setup(
     }
 )
 
-cmd /K "C:\C:\Users\user24\Desktop\rhoen\final-project\toshokan" python main.py
+
