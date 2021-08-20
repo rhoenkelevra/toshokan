@@ -55,6 +55,8 @@ def csvBook():
         # 置換したデータをcsvへ出力
         write_file = pd.DataFrame(read_file)
         write_file.to_csv(file, encoding="shift-jis", index=False)
+        
+        print(f"CSVファイルを{file}に出力しました。")
     
     except Exception:
         print("CSV出力を中止しました。")
@@ -63,5 +65,3 @@ def csvBook():
     cur.close()
     # コネクションの切断
     conn.close()
-    
-# csvBook()

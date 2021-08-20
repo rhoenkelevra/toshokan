@@ -65,13 +65,13 @@ def returnBook():
             
         #確認メッセージを表示する
         print("=" * 60)
-        print("図書ID：".ljust(10)+ str(books_results[0]))
-        print("図書名：".ljust(9)+str(books_results[1]))
-        print("利用者ID:".ljust(6) + str(customer_results[0]))
-        print("利用者名前:".ljust(3) + str(customer_results[1]))
-        print("ログID：".ljust(10)　+ str(l_id))
-        print("貸出日：".ljust(10)　+ str(new_date))
-        print("貸出期限：".ljust(6)　+str(in_limit_date))
+        print("図書ID：".ljust(11)+ str(books_results[0]))
+        print("図書名：".ljust(10)+str(books_results[1]))
+        print("利用者ID:".ljust(10) + str(customer_results[0]))
+        print("利用者名前:".ljust(8) + str(customer_results[1]))
+        print("ログID：".ljust(12) + str(l_id))
+        print("貸出日：".ljust(10) + str(new_date))
+        print("貸出期限：".ljust(9) + str(in_limit_date))
         print("=" * 60)
     
         
@@ -133,4 +133,4 @@ def returnBook():
         conn.close()
 
 
-returnBook()
+# returnBook()

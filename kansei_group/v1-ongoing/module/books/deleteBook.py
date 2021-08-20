@@ -11,7 +11,6 @@ def deleteBook():
             b_id = int(input("図書IDを入力してください。　（00　終了） \n> "))
 
             if b_id ==00:
-                print("終了しました。")
                 break
             
             data = (b_id,)
@@ -26,15 +25,15 @@ def deleteBook():
                 else:   
                     p_date = str(row[0][5])
         
-                    print("=" * 50)
-                    print(f"図書ID:\t{row[0][0]}")
-                    print(f"isbn:\t{row[0][1]}")
-                    print(f"図書名:\t{row[0][2]}")
-                    print(f"著者名:\t{row[0][3]}")
-                    print(f"出版社:\t{row[0][4]}")
-                    print(f"出版日:\t{p_date.replace('-','/')}")
-                    print("=" * 50)
-            
+                    print("=" * 60)
+                    print("図書ID:".ljust(9) + str(row[0][0]))
+                    print("isbn:".ljust(11) + str(row[0][1]))
+                    print("図書名:".ljust(8) + str(row[0][2]))
+                    print("著者名:".ljust(8) + str(row[0][3]))
+                    print("出版社:".ljust(8) + str(row[0][4]))
+                    print("出版日:".ljust(8) + str(p_date.replace('-','/')))
+                    print("=" * 60)
+                    
                     inp = input("この図書を削除しますか？ (はい:y / いいえ:n)\n> ")
                     
                     # 図書を削除登録する
@@ -53,7 +52,7 @@ def deleteBook():
                         
                         # 貸出中の図書の場合は削除不可
                         else:
-                            print("貸出中の図書は削除できません。")
+                            print("貸出中の図書を削除できません。")
                 
                     # noを入力した時は登録処理は中止する
                     else:   
@@ -75,4 +74,4 @@ def deleteBook():
     cur.close()
     conn.close()
     
-# deleteBook() 
+deleteBook() 

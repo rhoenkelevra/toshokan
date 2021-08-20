@@ -6,6 +6,8 @@ Created on Thu Aug 12 10:47:10 2021
 """
 from module.setup.connect import connect
 from getpass import getpass
+import re
+import unicodedata
 
 
 class User:
@@ -14,7 +16,10 @@ class User:
         self.login = 0
         self.loginName = ""
         self.login_status = False
+        self.__admin = 1000
         
+    def get_admin(self):
+        return self.__admin
 
     def login_user(self):
         conn = connect()
@@ -66,18 +71,53 @@ class User:
         cur = conn.cursor(buffered=True)
         
         u_name = input("ユーザ名を入力してください。（00　終了） \n>")
-        #TODO 00 to back
+        if u_name == "00":
+            return
+        
+      
         user_created = False
         # ｐａｓｓを正しく入れるまで
         while user_created == False:
-            u_pass = input("パスワードを入力してください。\n>")
-            #TODO fix pass input to hangaku
-            # check addBooks
-            while len(u_pass) < 4 or len(u_pass) > 8:
-                u_pass = input("パスワードは半角英数字で最小4文字、最大8文字で入力してください。\n>")
+            check = False
+            while check == False:
+                u_pass = input("パスワードを入力してください。\n>")
+           
+                #TODO fix pass input to hangaku
+                pattern = re.compile(r'[\u30A1-\u30F4][\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff66-\uff9f]+')
+                upass_check = pattern.fullmatch(u_pass)
+                print(upass_check)
+                test = ["１", "２", "３", "４", "５", "６", "７", "８", "９", "０",]
+                error_msg = 'パスワードは半角英数字で最小4文字、最大8文字で入力してください。'
+                
+                if upass_check:
+                    print(upass_check)
+                    print("jp char")
+                    continue
+                
+                if len(str(u_pass)) < 4 or len(str(u_pass)) > 8:
+                    print('len')
+                    continue
+                
+                if u_pass in test:
+                    print('width')
+                    continue
+                
+# =============================================================================
+            
+            # status = unicodedata.east_asian_width(u_pass)
+            # print(status)
+# # ============================================================================
+            
+            # check_upass_jp = re.compile(r'[\u30A1-\u30F4[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff66-\uff9f]]+')
+            # status_kata = re_katakana.fullmatch(n_name_kana)   
+
+                
+
             
                 
+           
             u_pass2 = input("確認の為パスワードもう一度入力してください。\n>")
+               
             if u_pass != u_pass2:
                 print("パスワードが合わない。最初からもう一度入力してください。")
                 continue
@@ -161,5 +201,5 @@ class User:
         
 
      
-# user = User()
-# user.login_user()
+user = User()
+user.add_user()

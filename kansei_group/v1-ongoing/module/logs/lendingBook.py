@@ -41,7 +41,7 @@ def lendingBook(u_id):
         success = False
         while success == False:
             try:
-                b_id = int(input("図書IDを選択してください。(00で終了）\n>"))
+                b_id = int(input("図書IDを入力してください。(00で終了）\n>"))
             except:
                print("数値を入れてください。")
                continue
@@ -115,18 +115,19 @@ def lendingBook(u_id):
             date_insert = True
       
         # メモの入力     
-        memo = input("メモを入力してください。\n>") 
+        memo = input("メモを入力してください。(任意)\n>") 
      
         
         # 入力内容確認 
-        print("="*50)
-        print("図書ID:",b_id)
-        print("ユーザーID:",u_id)
-        print("利用者ID:",c_id)
-        print("貸出日:",out_date)
-        print("メモ:",memo)      
+        print("="*60)
+        print("ログインID:".ljust(10) + str(u_id))
+        print("図書ID:".ljust(10) + str(b_id))
+        print("利用者ID:".ljust(9) + str(c_id))
+        print("貸出日:".ljust(9) + str(out_date))
+        print("メモ:".ljust(11) + str(memo))
+        print("="*60)
         
-        inp = input("この内容で登録してよろしいですか？( はい：y / いいえ：n )\n>")
+        inp = input("この内容でよろしいですか？( はい：y / いいえ：n )\n>")
         
         condition = True
         while condition == True:
@@ -137,7 +138,6 @@ def lendingBook(u_id):
             try:
                 data = (u_id, b_id, c_id, out_date, in_limit_date, memo )
                 # qtybook +1
-                print(c_id)
                 cur.execute("update customers set qtybooks = qtybooks + 1 where c_id = %s",(c_id,))
                 # status +1
                 cur.execute("update books set status = status - 1 where b_id = %s",(b_id,))
@@ -156,16 +156,17 @@ def lendingBook(u_id):
             
             condition = False    
     
-                
+ # 修正未               
         # 登録した図書情報の表示
-        print("=" * 50)
-        print("図書ID:",b_id)
-        print("図書名:",title[0][0])
-        print("利用者ID:",c_id)
-        print("利用者名:",c_name[0][0])       
-        print("貸出日:",out_date)
-        print("貸出期限:",in_limit_date_str)
-        print("=" * 50)          
+        print("=" * 60)
+        print("図書ID:".ljust(10) + str(b_id))
+        print("図書名:".ljust(9) + str(title[0][0]))
+        print("利用者ID:".ljust(9) + str(c_id))
+        print("利用者名:".ljust(8) + str(c_name[0][0]))        
+        print("貸出日:".ljust(9) + str(out_date))       
+        print("貸出期限:".ljust(8) + str(in_limit_date_str))             
+        print("=" * 60)          
+        
         
         # 更新の確定         
         conn.commit()    

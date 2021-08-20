@@ -51,6 +51,9 @@ def csvBook_lending():
                 fileobj.writerow(header)
                 for row in rows:
                     fileobj.writerow(row)
+                    
+            print(f"CSVファイルを{file}に出力しました。")
+
         except Exception:
             print("CSV出力を中止しました。")
 
