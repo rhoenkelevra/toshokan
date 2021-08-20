@@ -1,7 +1,0 @@
-showbook
-
-出版日：日付表示
-線　＋１０
-
-csv
-CSVファイルをC:/Users/user01/Desktop/customerlist.csvに作成しました。

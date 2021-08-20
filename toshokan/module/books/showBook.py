@@ -13,20 +13,20 @@ def showBook():
     
     # 図書情報の表示
     for row in rows:
-        print("=" * 50)
-        print(f"図書ID:\t\t{row[0]}")
-        print(f"isbn:\t\t{row[1]}")
-        print(f"図書名:\t\t{row[2]}")
-        print(f"著者名:\t\t{row[3]}")
-        print(f"出版社:\t\t{row[4]}")
-        print(f"出版日:\t\t{row[5]}")
+        print("=" * 60)
+        print("図書ID:".ljust(9) + str(row[0]))
+        print("isbn:".ljust(11) + str(row[1]))
+        print("図書名:".ljust(8) + str(row[2]))
+        print("著者名:".ljust(8) + str(row[3]))
+        print("出版社:".ljust(8) + str(row[4]))
+        print("出版日:".ljust(8) + str(row[5]).replace('-','/'))
         
         if row[6] == 0:
-            print("貸出状況:\t貸出中")
+            print("貸出状況:".ljust(7) + "貸出中")
         else:
-            print("貸出状況:\t貸出可")
+            print("貸出状況:".ljust(7) + "貸出可")
                 
-        print("=" * 50)
+        print("=" * 60)
      
     # カーソルの切断
     cur.close()

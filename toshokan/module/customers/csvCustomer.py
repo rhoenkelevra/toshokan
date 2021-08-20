@@ -13,7 +13,7 @@ def csvCustomer():
 
     conn = connect()
     cur = conn.cursor()
-    cur.execute("select c_id, c_name, c_name_kana, post_code, address, tel, email from customer where d_flag = 1 order by c_id")
+    cur.execute("select c_id, c_name, c_name_kana, post_code, address, tel, email from customers where d_flag = 1 order by c_id")
     rows = cur.fetchall()
 
     for row in rows:
@@ -39,12 +39,12 @@ def csvCustomer():
         writer.writerows(title)
     #CSV利用者表書き込み
         f = open(file, 'a', newline='')
-        #data =[[str(c_id)],[c_name], [c_name_kana], [str(post_code)], [address], [tel]]
-        #data = (row)
+
         writer = csv.writer(f)
         writer.writerows(data)
         f.close()
-        print(f"CSVファイルを{file}に作成しました")
+        print(f"CSVファイルを{file}に作成しました。")
     except  FileNotFoundError :
-        print ("CSVは作成せず、メニューに戻ります")
+        print ("CSVは作成せず、メニューに戻ります。")
+
 

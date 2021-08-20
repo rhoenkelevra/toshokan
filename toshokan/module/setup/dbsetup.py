@@ -39,7 +39,7 @@ TABLES["users"] = (
 )
 
 TABLES["customers"] = (
-    "CREATE TABLE `customer` ("
+    "CREATE TABLE `customers` ("
     "  `c_id` int(11) NOT NULL AUTO_INCREMENT,"
     "  `c_name` varchar(20) NOT NULL,"
     "  `c_name_kana` varchar(50) NOT NULL,"
@@ -71,7 +71,7 @@ TABLES["books"] = (
 )
 
 TABLES["logs"] = (
-    "CREATE TABLE `log` ("
+    "CREATE TABLE `logs` ("
     "  `l_id` int(11) NOT NULL AUTO_INCREMENT,"
     "  `u_id` int(11) NOT NULL,"
     "  `b_id` int(11) NOT NULL,"
@@ -84,7 +84,7 @@ TABLES["logs"] = (
     "  PRIMARY KEY (`l_id`),"
     "  FOREIGN KEY (u_id) REFERENCES `users` (`u_id`),"
     "  FOREIGN KEY (b_id) REFERENCES `books` (`b_id`),"
-    "  FOREIGN KEY (c_id) REFERENCES `customer` (`c_id`)"
+    "  FOREIGN KEY (c_id) REFERENCES `customers` (`c_id`)"
     ") ENGINE=InnoDB"
 )
 

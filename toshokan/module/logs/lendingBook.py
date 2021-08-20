@@ -24,7 +24,7 @@ def idtest(table_name,id_type,id):
     else:
         if table_name == "books":
             print("不正な図書IDが入力されました。")    
-        if table_name == "customer":
+        if table_name == "customers":
             print("不正な利用者IDが入力されました。")           
         success = False
         return success
@@ -35,13 +35,13 @@ def lendingBook(u_id):
     conn = connect()
     cur = conn.cursor(buffered=True)
     
-    log_input = False
-    while log_input == False:
+    logs_input = False
+    while logs_input == False:
        # 図書の選択
         success = False
         while success == False:
             try:
-                b_id = int(input("図書IDを選択してください。(00で終了）\n>"))
+                b_id = int(input("図書IDを入力してください。(00で終了）\n>"))
             except:
                print("数値を入れてください。")
                continue
@@ -62,18 +62,11 @@ def lendingBook(u_id):
                     success = False
                     continue  
         
-                if rows[1] == 0:
+                if rows[1] <= 0:
                     print("図書はすでに貸出中です。")
                     success = False
                     continue  
-    # # =================================================================
-    #     # ユーザーIDの選択 ※自動でログイン時のIDにする
-    #     try:
-    #         u_id = int(input("ユーザーIDを入力してください。(00で終了）\n>"))
-    #     except:
-    #         print("数値を入力してください。")
-            
-    # =================================================================
+   
         # 利用者IDの選択 
         success = False
         while success == False:
@@ -86,10 +79,10 @@ def lendingBook(u_id):
             if c_id == 00:
                 return
                 
-            success = idtest("customer", "c_id", c_id)
+            success = idtest("customers", "c_id", c_id)
             if success == True:
                 #ｑｔｙ確認
-                cur.execute("select qtybooks, c_id from customer where c_id =%s ", (c_id,))
+                cur.execute("select qtybooks, c_id from customers where c_id =%s ", (c_id,))
                 rows = cur.fetchone()  
         
                 if rows[0] >= 3:
@@ -122,34 +115,34 @@ def lendingBook(u_id):
             date_insert = True
       
         # メモの入力     
-        memo = input("メモを入力してください。\n>") 
+        memo = input("メモを入力してください。(任意)\n>") 
      
         
         # 入力内容確認 
-        print("="*50)
-        print("図書ID:",b_id)
-        print("ユーザーID:",u_id)
-        print("利用者ID:",c_id)
-        print("貸出日:",out_date)
-        print("メモ:",memo)      
+        print("="*60)
+        print("ログインID:".ljust(10) + str(u_id))
+        print("図書ID:".ljust(10) + str(b_id))
+        print("利用者ID:".ljust(9) + str(c_id))
+        print("貸出日:".ljust(9) + str(out_date))
+        print("メモ:".ljust(11) + str(memo))
+        print("="*60)
         
-        inp = input("この内容で登録してよろしいですか？( はい：y / いいえ：n )\n>")
+        inp = input("この内容でよろしいですか？( はい：y / いいえ：n )\n>")
         
         condition = True
         while condition == True:
-            if inp == "n":
-                break
+            if inp != "y":
+                return
             
-            # 変数へ代入し、logテーブルへデータ挿入
+            # 変数へ代入し、logsテーブルへデータ挿入
             try:
                 data = (u_id, b_id, c_id, out_date, in_limit_date, memo )
                 # qtybook +1
-                print(c_id)
-                cur.execute("update customer set qtybooks = qtybooks + 1 where c_id = %s",(c_id,))
+                cur.execute("update customers set qtybooks = qtybooks + 1 where c_id = %s",(c_id,))
                 # status +1
                 cur.execute("update books set status = status - 1 where b_id = %s",(b_id,))
-                # logに登録
-                cur.execute("insert into log (u_id, b_id, c_id, out_date, in_limit_date, memo ) values(%s, %s, %s, %s, %s, %s)", data)
+                # logsに登録
+                cur.execute("insert into logs (u_id, b_id, c_id, out_date, in_limit_date, memo ) values(%s, %s, %s, %s, %s, %s)", data)
                 print(cur.rowcount,"件、登録しました。")
             except Exception as error:
                 print(error)
@@ -158,28 +151,29 @@ def lendingBook(u_id):
             cur.execute("select title from books where b_id = %s", (b_id,))
             title = cur.fetchall()
             
-            cur.execute("select c_name from customer where c_id = %s", (c_id,))
+            cur.execute("select c_name from customers where c_id = %s", (c_id,))
             c_name = cur.fetchall()
             
             condition = False    
     
-                
+ # 修正未               
         # 登録した図書情報の表示
-        print("=" * 50)
-        print("図書ID:",b_id)
-        print("図書名:",title[0][0])
-        print("利用者ID:",c_id)
-        print("利用者名:",c_name[0][0])       
-        print("貸出日:",out_date)
-        print("貸出期限:",in_limit_date_str)
-        print("=" * 50)          
+        print("=" * 60)
+        print("図書ID:".ljust(10) + str(b_id))
+        print("図書名:".ljust(9) + str(title[0][0]))
+        print("利用者ID:".ljust(9) + str(c_id))
+        print("利用者名:".ljust(8) + str(c_name[0][0]))        
+        print("貸出日:".ljust(9) + str(out_date))       
+        print("貸出期限:".ljust(8) + str(in_limit_date_str))             
+        print("=" * 60)          
+        
         
         # 更新の確定         
         conn.commit()    
         # カーソル、コネクションの切断
         cur.close()
         conn.close()
-        log_input = True
+        logs_input = True
         
 
 # 共有→　ｃチーム　ファイル管理　完成ファイルに入れる際、「lendingBook()」削除

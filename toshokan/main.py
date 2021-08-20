@@ -37,8 +37,13 @@ while True:
     # ログイン状態の有無で出力内容変更
     if user.login == 0:
         print("\n" + "-" * 7, "トップメニュー", "-" * 7)
-
-        inp = int(input("1:ログイン　00:終了 \n>"))
+        
+        try:
+            inp = int(input("1:ログイン　00:終了 \n>"))
+        except:
+            print("数値を入れてください。")
+            continue
+            
     # 00と入力されたらプログラム終了
     if inp == 00:
         break
@@ -53,15 +58,47 @@ while True:
     if user.login_status is True:
        
         print("=" * 10, "メニュー", "=" * 10)
+        if user.login != user.get_admin():
+            try:
+                menu_choice = int(
+                    input("1: 図書貸出\n2: 図書返却\n3: 図書管理\n4: 利用者管理\n9: ログアウト \n>"))
+            except:
+                print("数値を入れてください。")
+                continue
         
-        try:
-            menu_choice = int(
-                input("1: 図書貸出\n2: 図書返却\n3: 図書管理\n4: 利用者管理\n5: 管理者\n9: ログアウト \n>"))
+        if user.login == user.get_admin():
+            try:
+                menu_choice = int(
+                    input("1: 図書貸出\n2: 図書返却\n3: 図書管理\n4: 利用者管理\n5: 管理者\n9: ログアウト \n>"))
+            except:
+                print("数値を入れてください。")
+                continue
+            
+            if menu_choice == 5:
+                try:
+                    kanri_menu = int(input("1: 管理者登録\n2: 管理者削除\n3: 管理者一覧\n9: ログアウト \n00: 戻る\n>"))
+                except:
+                    print("数値を入れてください。")
+                    continue
+                
+                if kanri_menu == 00:
+                    continue
+                
+                if kanri_menu == 1:
+                    user.add_user()
+                    
+                if kanri_menu == 2:    
+                    user.delete_user()
+                
+                if kanri_menu == 3:
+                    user.show_users()
+                    
+                if kanri_menu == 9:
+                    user.logout()
+            
         
-        except:
-            print("数値を入れてください。")
-            continue
         
+        # 全員用メニュー
         if menu_choice == 9:
             user.logout()
 
@@ -72,7 +109,11 @@ while True:
 
         if menu_choice == 3:
             
-            book_menu = int(input("1: 図書登録\n2: 図書削除\n3: 図書一覧\n4: 図書出力\n5: 貸出中図書出力\n00: 戻る\n>"))
+            try:
+                book_menu = int(input("1: 図書登録\n2: 図書削除\n3: 図書一覧\n4: 図書CSV出力\n5: 貸出中図書CSV出力\n00: 戻る\n>"))
+            except:
+                   print("数値を入れてください。")
+                   continue
             
             if book_menu == 00:
                 continue
@@ -90,7 +131,12 @@ while True:
             
             
         if menu_choice == 4:
-            customer_menu = int(input("1: 利用者登録\n2: 利用者削除　\n3: 利用者一覧\n4: 利用者出力\n00: 戻る\n>"))
+            try:
+                customer_menu = int(input("1: 利用者登録\n2: 利用者削除　\n3: 利用者一覧\n4: 利用者CSV出力\n00: 戻る\n>"))
+            except:
+                   print("数値を入れてください。")
+                   continue
+               
             if customer_menu == 00:
                 continue
             
@@ -104,20 +150,7 @@ while True:
                 csvCustomer()
             
            
-        if menu_choice == 5:
-            kanri_menu = int(input("1: 管理者登録\n2: 管理者削除\n3: 管理者一覧\n00: 戻る\n>"))
-            
-            if kanri_menu == 00:
-                continue
-            
-            if kanri_menu == 1:
-                user.add_user()
-                
-            if kanri_menu == 2:    
-                user.delete_user()
-            
-            if kanri_menu == 3:
-                user.show_users()
+        
 
         
 
