@@ -116,4 +116,4 @@ def addBook():
     # コネクションの切断
     conn.close()
 
-addBook()
+# addBook()
