@@ -76,13 +76,13 @@ def returnBook():
     
             # 確認メッセージを表示する
             print("=" * 60)
-            print("図書ID：".ljust(11) + str(books_results[0]))
-            print("図書名：".ljust(10) + str(books_results[1]))
-            print("利用者ID:".ljust(10) + str(customer_results[0]))
-            print("利用者名前:".ljust(8) + str(customer_results[1]))
-            print("ログID：".ljust(12) + str(l_id))
-            print("貸出日：".ljust(10) + str(new_date))
-            print("貸出期限：".ljust(9) + str(in_limit_date))
+            print("図書ＩＤ： ".ljust(12) + str(books_results[0]))
+            print("図書名： ".ljust(13) + str(books_results[1]))
+            print("利用者ＩＤ： ".ljust(11) + str(customer_results[0]))
+            print("利用者名前： ".ljust(11) + str(customer_results[1]))
+            print("ログＩＤ： ".ljust(12) + str(l_id))
+            print("貸出日： ".ljust(13) + str(new_date))
+            print("貸出期限 ".ljust(13) + str(in_limit_date))
             print("=" * 60)
     
             # 返却日の入力
@@ -145,3 +145,4 @@ def returnBook():
 
 
 # returnBook()
+

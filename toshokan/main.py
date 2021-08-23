@@ -8,6 +8,7 @@ from module.logs.lendingBook import lendingBook
 from module.books.addBook import addBook
 from module.books.deleteBook import deleteBook
 from module.books.showBook import showBook
+from module.books.updateBook import updateBook
 from module.books.csvBook import csvBook
 from module.books.csvBook_lending import csvBook_lending
 
@@ -73,6 +74,8 @@ def main():
 # ===========================================================
 #                           管理者用 
 # ===========================================================
+
+#TODO only show kanrisha menu
                 if menu_choice == 5:
                     try:
                         kanri_menu = int(
@@ -137,7 +140,11 @@ def main():
                     csvBook()
                 if book_menu == 5:
                     csvBook_lending()
-
+                if book_menu == 6:
+                    updateBook()
+                    
+                    
+                    
 # ============================ 利用者管理  =====================
             if menu_choice == 4:
                 try:

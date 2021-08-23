@@ -97,7 +97,7 @@ class User:
                         or len(str(u_pass)) > 8
                         or letter_cnt >= 1
                     ):
-                        print("パスワードは半角英数字で最小4文字、最大8文字で入力してください。")
+                        
                         continue
     
                     # パス確認
