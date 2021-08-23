@@ -70,6 +70,8 @@ class User:
         
 # ================== 管理者登録 ===================
     def add_user(self):
+        #TODO don't accept empty name
+        #TODO don't accept symbols
         try:
             conn = connect()
             cur = conn.cursor(buffered=True)
