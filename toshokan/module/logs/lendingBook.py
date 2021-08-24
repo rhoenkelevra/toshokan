@@ -72,13 +72,11 @@ def lendingBook(u_id):
             success = False
             while success == False:
                 try:
-                    c_id = int(input("利用者IDを入力してください。(00で終了）\n>"))
+                    c_id = int(input("利用者IDを入力してください。\n>"))
                 except:
                    print("数値を入れてください。")
                    continue
            
-                if c_id == 00:
-                    return
                     
                 success = idtest("customers", "c_id", c_id)
                 if success == True:

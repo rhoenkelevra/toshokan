@@ -33,11 +33,9 @@ def deleteCustomer():
         
             try:
                 did = int(input("利用者IDを入力してください。 \n>"))
-                print(did)
                 
                 if did in idlist:
                     ddd = str(did)
-    
                     break 
                      
                 else:
@@ -56,9 +54,9 @@ def deleteCustomer():
         
             print("削除する利用者情報 ")
             print("="*60)
-            print(f"利用者ID　:\t\t{rid}")
-            print(f"利用者名 : \t\t{rname}")
-            print(f"利用者名（カナ） :\t{rnamekana}")
+            print(f"利用者ID\t\t:{rid}")
+            print(f"利用者名\t\t:{rname}")
+            print(f"利用者名（カナ）\t:{rnamekana}")
     #            print(f"〒　 : \t{rpc}")
     #            print(f"住所 : \t{radd}")
     #            print(f"電話番号 : {rtel}")

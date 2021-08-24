@@ -82,7 +82,7 @@ def returnBook():
             print("利用者名前： ".ljust(11) + str(customer_results[1]))
             print("ログＩＤ： ".ljust(12) + str(l_id))
             print("貸出日： ".ljust(13) + str(new_date))
-            print("貸出期限 ".ljust(13) + str(in_limit_date))
+            print("貸出期限: ".ljust(13) + str(in_limit_date))
             print("=" * 60)
     
             # 返却日の入力

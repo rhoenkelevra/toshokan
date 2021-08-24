@@ -35,7 +35,7 @@ def addCustomer():
                 
                 
                 else:
-                    print("利用者名の最大値を超えています。")
+                    print("利用者名の長さが最大値を超えています。")
         #「利用者名が入力されていません。」のエラーメッセージ        
             else:
                 print("利用者名が入力されていません。 \n>")
@@ -68,12 +68,13 @@ def addCustomer():
         
             
         #郵便番号を入力(d/d/d形式)
+        
         while True:
             n_post_code = input("郵便番号(000-0000)を入力してください \n>")
             
             post_format = re.search("\d\d\d[-]\d\d\d\d", n_post_code)
             
-            if post_format:
+            if post_format == True:
                 break
             else:
                 print("入力できる郵便番号は、半角数字および”-”のみです。(例:000-0000)")    
@@ -187,4 +188,4 @@ def addCustomer():
         # コネクションの切断
         conn.close()
         
-#addCustomer()
+# addCustomer()

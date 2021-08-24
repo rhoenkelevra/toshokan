@@ -21,6 +21,7 @@ from module.customers.csvCustomer import csvCustomer
 
 
 def main():
+    print("\n")
     print("-" * 7, "アプリケーションへようこそ", "-" * 7)
     # ===========================================================
     #                       ログイン
@@ -30,7 +31,9 @@ def main():
     while True:
         # ログイン状態の有無で出力内容変更
         if user.login == 0:
-            print("\n" + "-" * 7, "トップメニュー", "-" * 7)
+            print("\n")
+            print("-" * 10,"図書貸出システム","-" * 9,)
+            print("-" * 11, "トップメニュー", "-" * 10)
 
             try:
                 inp = int(input("1:ログイン　00:終了 \n>"))

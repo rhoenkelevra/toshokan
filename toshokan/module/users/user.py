@@ -53,7 +53,7 @@ class User:
                 success = True
 
             print("\n")
-            print(f"ようこそ　{self.loginName}さん。")
+            print(f"ようこそ　{self.loginName}さん")
             self.login_status = True
             return self.login_status
 
