@@ -14,22 +14,17 @@ def addCustomer():
         cur = conn.cursor()
     
         while True:
-        # try:
-            # 利用者登録を確認
-            #登録する利用者名を入力
-        #(1)利用者名長野
             n_name = input("利用者名を入力してください。(20字以内）(00 終了) \n>")
-                # #利用者名が入力された？
                 
         # 利用者登録の終了
             if n_name == "00":
                 print("登録を終了しました。")
                 return
 
-                # #利用者名の文字長　=< 20
                 # #「利用者名の長さが最大値を超えています。」のエラーメッセージ合
             if n_name != "":
     
+                # #利用者名の文字長　=< 20
                 if len(n_name)<=20:
                     break
                 
@@ -69,15 +64,16 @@ def addCustomer():
             
         #郵便番号を入力(d/d/d形式)
         
-        while True:
+        post_status = False
+        while post_status == False:
             n_post_code = input("郵便番号(000-0000)を入力してください \n>")
             
-            post_format = re.search("\d\d\d[-]\d\d\d\d", n_post_code)
-            
-            if post_format == True:
-                break
-            else:
-                print("入力できる郵便番号は、半角数字および”-”のみです。(例:000-0000)")    
+            post_format = re.findall(r'^[0-9]{3}-[0-9]{4}$', n_post_code)
+            if not post_format:
+                print("入力できる郵便番号は、半角数字および”-”のみです。(例:000-0000)")
+                continue
+             
+            post_status = True
             
             
         #住所を入力   
@@ -116,47 +112,16 @@ def addCustomer():
         
         # カスタマー情報をDBに書き込み
         data = (n_name,n_name_kana,n_post_code,n_address,n_tel,n_email,n_memo)
-        print()
-        
-        # #入力内容表示
-        # print("=" * 50)
-        # print("利用者名:".ljust(10) + str(n_name))
-        # print("利用者名:".ljust(10) + str(n_name_kana))
-        # print("郵便番号".ljust(10) + str(n_post_code))        
-        # print("住所:".ljust(14) + str(n_address))
-        # print("電話番号:".ljust(10) + str(n_tel))
-        # print("E-mail（任意）:".ljust(10) + str(E-mail))
-        # print("メモ（任意）:".ljust(10) + str(n_memo))        
-        # print("=" * 50)
-        
-        # inp = input("この内容で登録してよろしいですか？( はい：y / いいえ：n )\n>")
-        
-        # condition = True
-        # while condition == True:
-        #     if inp != "y":
-        #         return
-            
-        #     # 変数へ代入し、logsテーブルへデータ挿入
-        #     try:
-    
+       
         
         # 利用者情報テーブルへの追加
         cur.execute("insert into customers(c_name, c_name_kana, post_code, address, tel, email, memo) values(%s, %s, %s, %s, %s, %s, %s)", (data))
-        # if cur.rowcount == 0:
-        #         # 追加失敗
-        #         raise Exception
-            
-            # 更新を確定する
-    
-    #        cur.excute("select c_name,c_name_kana,c_post_code,c_address,c_tel,c_email,c_memo from customer where c_name = %s,(n_name,)")
-    #        rows = cur.fetchall()
-    #        for row in rows:
+        
         cur.execute("select c_id, c_name, c_name_kana, post_code, address, tel, email, memo from customers where c_name = %s",(n_name,))
         rows = cur.fetchall()
     
         for row in rows:
             print("=" * 60)
-    #        print("利用者ID:.ljust(13) + {row[0]}")
             print(f"利用者ID\t:{row[0]}")
             print(f"利用者名\t:{row[1]}")
             print(f"利用者名（カナ）:{row[2]}")
@@ -172,15 +137,9 @@ def addCustomer():
             print("利用者情報を登録しました。")
         else:
                 print("登録中止します。")
-    except:
+    except Exception as error:
+            print(error)
             print("登録失敗しました。")
-            
-    
-    
-        #    print(f{"n_name"さんのIDは""です。})
-            # except:
-            #     conn.rollback()
-            #     print("利用者情報の登録に失敗しました。")
     finally:
         # カーソルの切断
         cur.close()
