@@ -132,7 +132,7 @@ def lendingBook(u_id):
             
             condition = True
             while condition == True:
-                if inp == "n":
+                if inp != "y":
                     return
                 
                     

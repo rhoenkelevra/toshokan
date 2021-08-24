@@ -11,8 +11,8 @@ from module.books.deleteBook import deleteBook
 from module.books.showBook import showBook
 from module.books.updateBook import updateBook
 
-# from module.books.csvBook import csvBook
-# from module.books.csvBook_lending import csvBook_lending
+from module.books.csvBook import csvBook
+from module.books.csvBook_lending import csvBook_lending
 
 from module.customers.addCustomer import addCustomer
 from module.customers.deleteCustomer import deleteCustomer
@@ -97,14 +97,14 @@ def main():
                         deleteBook()
                     if book_menu == 3:
                         showBook()
-                    # if book_menu == 4:
-                    # csvBook()
-                    # if book_menu == 5:
-                    # csvBook_lending()
+                    if book_menu == 4:
+                        csvBook()
+                    if book_menu == 5:
+                        csvBook_lending()
                     if book_menu == 6:
                         updateBook()
 
-                # ============================ 利用者管理  =====================
+# ============================ 利用者管理  ===================
                 if menu_choice == 4:
                     try:
                         customer_menu = int(
@@ -129,12 +129,14 @@ def main():
                         csvCustomer()
 
             # ===========================================================
-            #                           管理者用
+            #                           ユーザ用
             # ===========================================================
+            
+            #TODO [x] separate kanrisha menu
             if user.login == user.get_admin():
                 try:
                     kanri_menu = int(
-                        input("1: 管理者登録\n2: 管理者削除\n3: 管理者一覧\n9: ログアウト\n>")
+                        input("1: ユーザ登録\n2: ユーザ削除\n3: ユーザ一覧\n9: ログアウト\n>")
                     )
 
                 except:

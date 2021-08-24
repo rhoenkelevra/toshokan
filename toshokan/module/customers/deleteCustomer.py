@@ -55,7 +55,7 @@ def deleteCustomer():
     #        print (row)
         
             print("削除する利用者情報 ")
-            print("-"*60)
+            print("="*60)
             print(f"利用者ID　:\t\t{rid}")
             print(f"利用者名 : \t\t{rname}")
             print(f"利用者名（カナ） :\t{rnamekana}")
@@ -64,7 +64,7 @@ def deleteCustomer():
     #            print(f"電話番号 : {rtel}")
     #            print(f"E-mail : {remail}")
     #            print(f"メモ : {rmemo}") 
-            
+            print("="*60)
         #利用者の借用状況（貸出数）        
         #選択した利用者が図書を借用中である？　
     
@@ -96,3 +96,4 @@ def deleteCustomer():
         conn.commit()
         cur.close()
     conn.close()
+

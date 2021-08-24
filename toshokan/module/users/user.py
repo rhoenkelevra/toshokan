@@ -76,6 +76,8 @@ class User:
             conn = connect()
             cur = conn.cursor(buffered=True)
 
+#TODO [x]check for empty in username
+#TODO [x]check for symbols in password
             user_name_input = False
             while user_name_input == False:
                 u_name = input("ユーザ名を入力してください。（00　終了） \n>")
@@ -87,7 +89,6 @@ class User:
 
             if u_name == "00":
                 return
-
             user_created = False
             # ｐａｓｓを正しく入れるまで
             while user_created == False:
@@ -134,8 +135,8 @@ class User:
             new_id = cur.lastrowid
 
             print("=" * 30)
-            print(f"名前：　{u_name}")
-            print(f"ログインＩＤ：　{new_id}")
+            print(f"名前：　　　　{u_name}")
+            print(f"ログインID：　{new_id}")
             print(f"パスワード：　{u_pass}")
             print("=" * 30)
             print("登録しました。")
@@ -172,7 +173,7 @@ class User:
                     continue
                 for row in res:
                     print("=" * 30)
-                    print(f"ユーザＩＤ： {row[0]}")
+                    print(f"ユーザID：  {row[0]}")
                     print(f"ユーザ名：　{row[1]}")
                     print("=" * 30)
 
@@ -209,7 +210,7 @@ class User:
 
             for row in res:
                 print("=" * 30)
-                print(f"ユーザＩＤ：　{row[0]}")
+                print(f"ユーザID：　{row[0]}")
                 print(f"ユーザ名：　{row[1]}")
                 print("=" * 30)
 
