@@ -10,7 +10,10 @@ def addBook():
 
         # カーソルの作成
         cur = conn.cursor()
-
+        
+        print("=" * 60)
+        print(" " * 22,"新規図書登録"," " * 22,)
+        print("=" * 60)
     # 図書登録
         while True:
             # ＜isbn＞
@@ -156,6 +159,7 @@ def addBook():
                     print("=" * 60)
 
                 else:
+                    cur.rollback()
                     print("図書登録を中止しました。")
                     continue
 
@@ -168,3 +172,5 @@ def addBook():
         cur.close()
         # コネクションの切断
         conn.close()
+
+# addBook()

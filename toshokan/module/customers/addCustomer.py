@@ -12,7 +12,9 @@ def addCustomer():
         conn = connect()
         # カーソルの作成
         cur = conn.cursor()
-    
+        print("=" * 60)
+        print(" " * 22,"新規利用者登録"," " * 22,)
+        print("=" * 60)
         while True:
             n_name = input("利用者名を入力してください。(20字以内）(00 終了) \n>")
                 
@@ -35,11 +37,8 @@ def addCustomer():
             else:
                 print("利用者名が入力されていません。 \n>")
                 
-        print("=" * 60)
-        print(" " * 22,"新規利用者登録"," " * 22,)
-        print("=" * 60)
-        print("" * 60)    
-        print("利用者の関連情報を入力してください。")
+        
+        
             
         #カナ名を入力
         n_name_kana = input("カナ名を入力してください。(50字以内) \n>")
@@ -116,27 +115,29 @@ def addCustomer():
         
         # 利用者情報テーブルへの追加
         cur.execute("insert into customers(c_name, c_name_kana, post_code, address, tel, email, memo) values(%s, %s, %s, %s, %s, %s, %s)", (data))
+        c_id = cur.lastrowid
         
-        cur.execute("select c_id, c_name, c_name_kana, post_code, address, tel, email, memo from customers where c_name = %s",(n_name,))
-        rows = cur.fetchall()
+        # cur.execute("select c_id, c_name, c_name_kana, post_code, address, tel, email, memo from customers where c_name = %s",(n_name,))
+        # rows = cur.fetchall()
     
-        for row in rows:
-            print("=" * 60)
-            print(f"利用者ID\t:{row[0]}")
-            print(f"利用者名\t:{row[1]}")
-            print(f"利用者名（カナ）:{row[2]}")
-            print(f"〒   \t\t:{row[3]}")
-            print(f"住所 \t\t:{row[4]}")
-            print(f"電話番号 \t:{row[5]}")        
-            print(f"E-mail\t\t:{row[6]}") 
-            print(f"メモ    \t:{row[7]}")
-            print("=" * 60)        
+        # for row in rows:
+        print("=" * 60)
+        print(f"利用者ID\t:{c_id}")
+        print(f"利用者名\t:{n_name}")
+        print(f"利用者名（カナ）:{n_name_kana}")
+        print(f"〒   \t\t:{n_post_code}")
+        print(f"住所 \t\t:{n_address}")
+        print(f"電話番号 \t:{n_tel}")        
+        print(f"E-mail\t\t:{n_email}") 
+        print(f"メモ    \t:{n_memo}")
+        print("=" * 60)        
         conf=input("この内容で確定してよろしいですか。　はい:y いいえ:n \n>")
         if conf == "y":
             conn.commit()
             print("利用者情報を登録しました。")
         else:
-                print("登録中止します。")
+            cur.rollback()
+            print("登録中止します。")
     except Exception as error:
             print(error)
             print("登録失敗しました。")
