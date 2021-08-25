@@ -131,7 +131,6 @@ class User:
             cur.execute(
                 "insert into users (u_name, u_pass) values (%s, %s)", data
             )
-            conn.commit()
             new_id = cur.lastrowid
 
             print("=" * 30)
@@ -140,7 +139,10 @@ class User:
             print(f"パスワード：　{u_pass}")
             print("=" * 30)
             print("登録しました。")
-
+            
+            
+            
+            conn.commit()
         except Exception as error:
             print(error)
         finally:
