@@ -159,7 +159,7 @@ def addBook():
                     print("=" * 60)
 
                 else:
-                    cur.rollback()
+                    conn.rollback()
                     print("図書登録を中止しました。")
                     continue
 

@@ -136,7 +136,7 @@ def addCustomer():
             conn.commit()
             print("利用者情報を登録しました。")
         else:
-            cur.rollback()
+            conn.rollback()
             print("登録中止します。")
     except Exception as error:
             print(error)
