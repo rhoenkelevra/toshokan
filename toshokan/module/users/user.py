@@ -70,14 +70,11 @@ class User:
 
     # ================== 管理者登録 ===================
     def add_user(self):
-        # TODO don't accept empty name
-        # TODO don't accept symbols
+        
         try:
             conn = connect()
             cur = conn.cursor(buffered=True)
 
-#TODO [x]check for empty in username
-#TODO [x]check for symbols in password
             user_name_input = False
             while user_name_input == False:
                 u_name = input("ユーザ名を入力してください。（00　終了） \n>")

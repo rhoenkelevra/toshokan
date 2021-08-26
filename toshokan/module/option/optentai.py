@@ -36,7 +36,7 @@ def optentai():
             cur.execute("select title from books where b_id = %s" ,datab)
             rows = cur.fetchall()
             for row in rows:
-                ebook= row
+                ebook = row[0]
     #延滞している利用者情報を検索
             datac = (cid,)
             cur.execute("select c_name,tel,email from customers where c_id = %s" ,datac)
@@ -60,4 +60,4 @@ def optentai():
     # コネクションの切断
     conn.close()
     
-#optentai()
+# optentai()

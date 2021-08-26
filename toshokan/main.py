@@ -18,6 +18,7 @@ from module.customers.addCustomer import addCustomer
 from module.customers.deleteCustomer import deleteCustomer
 from module.customers.showCustomer import showCustomer
 from module.customers.csvCustomer import csvCustomer
+from module.customers.updateCustomer import updateCustomer
 
 from module.option.optentai import optentai
 from module.option.optninki import optninki
@@ -135,7 +136,7 @@ def main():
                         csvCustomer()
                         
                 if menu_choice == 5:
-                    option_menu = int(input("1: 延滞書名リスト\n2: 人気図書リスト\n00: 戻る\n>"))
+                    option_menu = int(input("1: 延滞書名リスト\n2: 人気図書リスト\n3: 図書更新\n4: 利用者更新\n00: 戻る\n>"))
             
                     if option_menu == 00:
                         continue
@@ -145,12 +146,17 @@ def main():
                         
                     if option_menu == 2:
                         optninki()
+                        
+                    if option_menu == 3:
+                        updateBook()
+                        
+                    if option_menu == 4:
+                        updateCustomer()
 
             # ===========================================================
             #                           ユーザ用
             # ===========================================================
             
-            #TODO [x] separate kanrisha menu
             if user.login == user.get_admin():
                 try:
                     kanri_menu = int(
