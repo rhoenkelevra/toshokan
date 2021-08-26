@@ -19,6 +19,9 @@ from module.customers.deleteCustomer import deleteCustomer
 from module.customers.showCustomer import showCustomer
 from module.customers.csvCustomer import csvCustomer
 
+from module.option.optentai import optentai
+from module.option.optninki import optninki
+
 
 def main():
     print("\n")
@@ -61,7 +64,7 @@ def main():
                 try:
                     menu_choice = int(
                         input(
-                            "1: 図書貸出\n2: 図書返却\n3: 図書管理\n4: 利用者管理\n9: ログアウト \n>"
+                            "1: 図書貸出\n2: 図書返却\n3: 図書管理\n4: 利用者管理\n5: オプション\n9: ログアウト \n>"
                         )
                     )
                 except:
@@ -130,6 +133,18 @@ def main():
                         showCustomer()
                     if customer_menu == 4:
                         csvCustomer()
+                        
+                if menu_choice == 5:
+                    option_menu = int(input("1: 延滞書名リスト\n2: 人気図書リスト\n00: 戻る\n>"))
+            
+                    if option_menu == 00:
+                        continue
+                    
+                    if option_menu == 1:
+                        optentai()
+                        
+                    if option_menu == 2:
+                        optninki()
 
             # ===========================================================
             #                           ユーザ用
